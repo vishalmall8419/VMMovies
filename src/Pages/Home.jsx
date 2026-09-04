@@ -4,19 +4,17 @@ import Card from '../Component/Card'
 import Hero from '../Component/Hero'
 import GenreCard from '../Component/GenreCard'
 import { Link } from 'react-router-dom'
-import {getdata} from "../API/Api.js"
+
 
 
 const Home = () => {
 
 
 
-
-
     return (
         <>
             <div className='bg-[#050C17] p-10'>
-                <button className='p-4 rounded-2xl bg-white' onClick={() => { getdata() }}>get data </button>
+                <button className='p-4 rounded-2xl bg-white'>get data </button>
                 <Hero />
                 <div className='mt-10 pt-10'>
                     <div className='flex justify-between'>

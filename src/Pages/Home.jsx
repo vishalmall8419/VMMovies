@@ -4,25 +4,13 @@ import Card from '../Component/Card'
 import Hero from '../Component/Hero'
 import GenreCard from '../Component/GenreCard'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import {getdata} from "../API/Api.js"
+
 
 const Home = () => {
 
 
 
-
- async function getdata() {
-    try {
-        const response = await axios.get(
-            "https://api.themoviedb.org/3/movie/popular?api_key=1377537a2f8bda31d2dd7051ab67f643"
-        );
-
-        console.log(response.data);
-        console.log(response.data.results);
-    } catch (error) {
-        console.error("ERROR:", error);
-    }
-}
 
 
     return (

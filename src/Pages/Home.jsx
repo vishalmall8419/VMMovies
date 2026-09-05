@@ -4,17 +4,42 @@ import Card from '../Component/Card'
 import Hero from '../Component/Hero'
 import GenreCard from '../Component/GenreCard'
 import { Link } from 'react-router-dom'
+import { useContext, useMemo } from 'react'
+import { MovieContext } from '../Context/APIContext'
 
 
 
 const Home = () => {
 
+    const movies = useContext(MovieContext);
+
+    const allMovies = useMemo(() => {
+        return [...movies]
+    }, [movies])
+
+    const topRated = useMemo(() => {
+
+        return [...movies].filter((movie) => movie.imdbRating >= 8)
+
+
+    }, [movies])
+
+    const LatestMovies = useMemo(() => {
+
+        return [...movies].filter((movie) => movie.Year).sort((a, b) => Number(b.Year) - Number(a.Year))
+
+
+    }, [movies])
+
+
+    const allGenres = allMovies.map(movie => movie.Genre.split(",")).flat();
+
+    const uniqueGenres = [...new Set(allGenres)];
 
 
     return (
         <>
             <div className='bg-[#050C17] p-10'>
-                <button className='p-4 rounded-2xl bg-white'>get data </button>
                 <Hero />
                 <div className='mt-10 pt-10'>
                     <div className='flex justify-between'>
@@ -26,11 +51,11 @@ const Home = () => {
                         <Link to="" className='text-amber-400 flex flex-nowrap items-center gap-1' >View All <StepForward size={16} strokeWidth={3} /> </Link>
                     </div>
                     <div className='mt-8 flex gap-4 overflow-x-scroll'>
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
+
+                        {
+                            allMovies.map((movie) => { return <Card movie={movie} key={movie.imdbID} /> })
+
+                        }
                     </div>
                 </div>
                 <div className='mt-10 pt-10'>
@@ -43,15 +68,10 @@ const Home = () => {
                         <Link to="" className='text-amber-400 flex flex-nowrap items-center gap-1 '  >View all <StepForward size={16} strokeWidth={3} /> </Link>
                     </div>
                     <div className='mt-8 flex gap-4 overflow-x-scroll'>
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
-                        <GenreCard />
+                        {
+                            uniqueGenres.map((genre) => { return <GenreCard genre={genre} key={genre + Math.random} /> })
+
+                        }
                     </div>
                 </div>
 
@@ -68,11 +88,11 @@ const Home = () => {
                         </Link>
                     </div>
                     <div className='mt-8 flex gap-4 overflow-x-scroll'>
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
+                        {
+                            topRated.map((movie) => { return <Card movie={movie} key={movie.imdbID} /> })
+                        }
+
+
                     </div>
                 </div>
 
@@ -88,11 +108,9 @@ const Home = () => {
                         </Link>
                     </div>
                     <div className='mt-8 flex gap-4 overflow-x-scroll'>
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
+                        {
+                            LatestMovies.map((movie) => { return <Card movie={movie} key={movie.imdbID} /> })
+                        }
                     </div>
                 </div>
 

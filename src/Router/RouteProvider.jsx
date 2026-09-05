@@ -5,27 +5,49 @@ import Navbar from "../Component/Navbar";
 
 import Home from "../Pages/Home";
 import MovieDetails from "../Pages/MovieDetail";
+import { useContext, useMemo } from "react";
+import { MovieContext } from "../Context/APIContext";
+import Loading from "../Component/Loading";
+import SearchPage from "../Pages/SearchPage";
 
 const RouteProvider = () => {
-  return (
-    <>
-      <Navbar />
+  const movies = useContext(MovieContext);
 
-      <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
+  const allMovies = useMemo(() => {
+    return [...movies]
+  }, [movies])
 
-        <Route
-          path="/moviedetails/:movieId"
-          element={<MovieDetails />}
-        />
-      </Routes>
 
-      <Footer />
-    </>
-  );
+  if (allMovies.length === 0) {
+    return (<Loading />)
+  } else {
+
+
+
+    return (
+      <>
+        <Navbar />
+
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+
+          <Route
+            path="/moviedetails/:movieId"
+            element={<MovieDetails />}
+          />
+          <Route
+            path="/search/:searchTitle"
+            element={<SearchPage />}
+          />
+        </Routes>
+
+        <Footer />
+      </>
+    );
+  }
 };
 
 export default RouteProvider;

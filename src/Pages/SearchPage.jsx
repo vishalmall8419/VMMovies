@@ -4,6 +4,7 @@ import Hero from '../Component/Hero'
 import { Link, useParams } from 'react-router-dom'
 import { useContext, useMemo } from 'react'
 import { MovieContext } from '../Context/APIContext'
+import Card from '../Component/Card'
 
 const SearchPage = () => {
     const search = useParams("searchTitle")
@@ -15,7 +16,7 @@ const SearchPage = () => {
         return movie.Title.toLowerCase().includes(search.searchTitle.toLowerCase());
     })
 
-    console.log("search ", searchedMovies);
+
 
 
     return (
@@ -33,8 +34,9 @@ const SearchPage = () => {
                     <Link to="" className='text-amber-400 flex flex-nowrap items-center gap-1' >View All <StepForward size={16} strokeWidth={3} /> </Link>
                 </div>
                 <div className='mt-8 flex gap-4 overflow-x-scroll text-white'>
-                    card here
-                    sfdsdfsdffffffff Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quo voluptatibus facere consequatur tempora cupiditate omnis, incidunt sit voluptate eveniet.
+                    {
+                        searchedMovies.map((movie) => <Card movie={movie} /> )
+                    }
                 </div>
             </div>
 

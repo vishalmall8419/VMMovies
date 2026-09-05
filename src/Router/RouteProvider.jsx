@@ -9,6 +9,8 @@ import { useContext, useMemo } from "react";
 import { MovieContext } from "../Context/APIContext";
 import Loading from "../Component/Loading";
 import SearchPage from "../Pages/SearchPage";
+import About from "../Pages/About";
+import Watchlist from "../Pages/watchlist";
 
 const RouteProvider = () => {
   const movies = useContext(MovieContext);
@@ -42,6 +44,9 @@ const RouteProvider = () => {
             path="/search/:searchTitle"
             element={<SearchPage />}
           />
+          <Route path="/about" element={<About />} />
+          <Route path="/watchlist" element={<Watchlist />} />
+
         </Routes>
 
         <Footer />

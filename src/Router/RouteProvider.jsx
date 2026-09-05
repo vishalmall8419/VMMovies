@@ -10,7 +10,7 @@ import { MovieContext } from "../Context/APIContext";
 import Loading from "../Component/Loading";
 import SearchPage from "../Pages/SearchPage";
 import About from "../Pages/About";
-import Watchlist from "../Pages/watchlist";
+import Watchlist from "../Pages/Watchlist";
 
 const RouteProvider = () => {
   const movies = useContext(MovieContext);
